@@ -1,0 +1,25 @@
+Brute-force search for combinators
+
+# In search of a particular one-point combinator
+All of the one-point combinators I am aware of contain application to an abstraction. Depending on the arguments, such combinators cannot always be rewritten when applied enough arguments. My goal is to use a brute-force search to find a one-point combinator which meets this requirement, and therefore can always be rewritten when applied to enough arguments.
+
+This one-point combinator will take as input some number of arguments and output some nested application of the arguments, which can be represented as a list.
+
+For example, the combinator K is defined as:
+2 -> 0
+
+S is defined as:
+3 -> [[0, 2], [1, 2]]
+
+# Forming a basis
+Since K and S form a basis, a one-point combinator only needs to be able to produce K and S in order to form a basis by itself. That is, some applications of the combinator result in K, and some other applications result in S.
+
+For example, K and S can be written in terms of the X combinator (\x.xSK):
+K = [X, [X, [X, X]]]
+S = [X, [X, [X, [X, X]]]]
+
+# Enumerating the search space
+A combinator is defined by the number of arguments, n, that it consumes and the application of those arguments, A. A for a given n is defined by the following grammar:
+A := 1 | 2 | ... | n | [A, A]
+
+Combinators for a given n can be generated similarly to the rational numbers - by iterating over the search space in a 1D manner, even though the search space appears to be 2D. What appear to be the two dimensions of combinators are n and the depth of the application. To flatten this to one dimension, iteration begins with a list of combinator generators containing the generator of combinators of 1 argument, and then yields the first combinator from that generator. On the next iteration, the generator of combinators of 2 arguments is added to the list, and iteration yields the next combinator from both generators. On each iteration, the generator of combinators of n+1 arguments is added to the list and the next combinator from each generator in the list is yielded.
