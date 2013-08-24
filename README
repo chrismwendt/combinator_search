@@ -1,7 +1,7 @@
 Brute-force search for combinators
 
 # In search of a particular one-point combinator
-All of the one-point combinators I am aware of contain application to an abstraction. Depending on the arguments, such combinators cannot always be rewritten when applied enough arguments. My goal is to use a brute-force search to find a one-point combinator which meets this requirement, and therefore can always be rewritten when applied to enough arguments.
+All of the one-point combinators I am aware of contain application to an abstraction. Depending on the arguments, such combinators cannot always be rewritten when applied to enough arguments. My goal is to use a brute-force search to find a one-point combinator which meets this requirement, and therefore can always be rewritten when applied to enough arguments.
 
 This one-point combinator will take as input some number of arguments and output some nested application of the arguments, which can be represented as a list.
 
