@@ -25,32 +25,32 @@ def test_enumerate_first():
 
     combinator_generator = combinators.generator()
 
-    assert combinator_generator.next() == {'arguments': 1, 'rewrite': 0}
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 1, 'rewrite': 0})
 
-    assert combinator_generator.next() == {'arguments': 1, 'rewrite': [0, 0]}
-    assert combinator_generator.next() == {'arguments': 2, 'rewrite': 0}
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 1, 'rewrite': [0, 0]})
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 2, 'rewrite': 0})
 
-    assert combinator_generator.next() == {'arguments': 1, 'rewrite': [0, [0, 0]]}
-    assert combinator_generator.next() == {'arguments': 2, 'rewrite': 1}
-    assert combinator_generator.next() == {'arguments': 3, 'rewrite': 0}
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 1, 'rewrite': [0, [0, 0]]})
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 2, 'rewrite': 1})
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 3, 'rewrite': 0})
 
-    assert combinator_generator.next() == {'arguments': 1, 'rewrite': [[0, 0], 0]}
-    assert combinator_generator.next() == {'arguments': 2, 'rewrite': [0, 0]}
-    assert combinator_generator.next() == {'arguments': 3, 'rewrite': 1}
-    assert combinator_generator.next() == {'arguments': 4, 'rewrite': 0}
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 1, 'rewrite': [[0, 0], 0]})
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 2, 'rewrite': [0, 0]})
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 3, 'rewrite': 1})
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 4, 'rewrite': 0})
 
-    assert combinator_generator.next() == {'arguments': 1, 'rewrite': [[0, 0], [0, 0]]}
-    assert combinator_generator.next() == {'arguments': 2, 'rewrite': [0, 1]}
-    assert combinator_generator.next() == {'arguments': 3, 'rewrite': 2}
-    assert combinator_generator.next() == {'arguments': 4, 'rewrite': 1}
-    assert combinator_generator.next() == {'arguments': 5, 'rewrite': 0}
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 1, 'rewrite': [[0, 0], [0, 0]]})
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 2, 'rewrite': [0, 1]})
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 3, 'rewrite': 2})
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 4, 'rewrite': 1})
+    nose.tools.eq_(combinator_generator.next(),  {'arguments': 5, 'rewrite': 0})
 
     # ...
 
 def test_enumerate_iks():
-    assert {'arguments': 1, 'rewrite': 0} in combinators.generator()
-    assert {'arguments': 2, 'rewrite': 0} in combinators.generator()
-    assert {'arguments': 3, 'rewrite': [[0, 2], [1, 2]]} in combinators.generator()
+    nose.tools.ok_({'arguments': 1, 'rewrite': 0} in combinators.generator())
+    nose.tools.ok_({'arguments': 2, 'rewrite': 0} in combinators.generator())
+    nose.tools.ok_({'arguments': 3, 'rewrite': [[0, 2], [1, 2]]} in combinators.generator())
 
 if __name__ == '__main__':
     main()
