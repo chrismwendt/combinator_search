@@ -1,28 +1,35 @@
-def generator():
-    generators = []
-    n = 0
-    while True:
-        n += 1
-        generators.append(applications(n))
-        for generator in generators:
-            yield generator.next()
+import itertools
 
-def applications(arguments, depth=None):
-    if depth == None:
-        depth = 1
-        for argument in range(arguments):
-            yield {'arguments': arguments, 'rewrite': argument}
-        while True:
-            depth += 1
-            for a in applications(arguments, depth=depth-1):
-                for b in applications(arguments, depth=depth-1):
-                    yield {'arguments': arguments, 'rewrite': [a, b]}
-    if depth == 0:
-        for argument in range(arguments):
-            yield argument
-    if depth > 0:
+def generator():
+    tree_generator = binary_trees()
+    tree_list = []
+    for n in itertools.count(1):
+        tree_list.append(tree_generator.next())
+        for i in range(n):
+            for application in applications(arguments=n-i, tree=tree_list[i]):
+                yield {'arguments': n-i, 'rewrite': application}
+
+def applications(arguments=0, tree=None):
+    if tree is None:
         for argument in range(arguments):
             yield argument
-        for a in applications(arguments=arguments, depth=depth-1):
-            for b in applications(arguments=arguments, depth=depth-1):
-                yield [a, b]
+    else:
+        for left in applications(arguments=arguments, tree=tree[0]):
+            for right in applications(arguments=arguments, tree=tree[1]):
+                yield [left, right]
+
+def binary_trees(leaves=None):
+    if leaves is None:
+        for leaves in itertools.count(1):
+            for tree in binary_trees(leaves=leaves):
+                yield tree
+
+    if leaves == 1:
+        yield None
+    else:
+        for i in range(1, leaves):
+            leaves_left = i
+            leaves_right = leaves-i
+            for tree_left in binary_trees(leaves=leaves_left):
+                for tree_right in binary_trees(leaves=leaves_right):
+                    yield [tree_left, tree_right]
