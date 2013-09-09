@@ -23,3 +23,6 @@ A combinator is defined by the number of arguments, n, that it consumes and the 
 A := 1 | 2 | ... | n | [A, A]
 
 Combinators for a given n can be generated similarly to the rational numbers - by iterating over the search space in a 1D manner, even though the search space appears to be 2D. What appear to be the two dimensions of combinators are n and the depth of the application. To flatten this to one dimension, iteration begins with a list of combinator generators containing the generator of combinators of 1 argument, and then yields the first combinator from that generator. On the next iteration, the generator of combinators of 2 arguments is added to the list, and iteration yields the next combinator from both generators. On each iteration, the generator of combinators of n+1 arguments is added to the list and the next combinator from each generator in the list is yielded.
+
+# Results so far
+Despite the fact that a matching combinator would likely be short, the search space is so large that I have decided to shelve the search.
